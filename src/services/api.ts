@@ -1,4 +1,3 @@
-
 import { toast } from "sonner";
 
 const API_URL = 'https://fakestoreapi.com';

@@ -23,7 +23,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 24 98% 50%;
+    --accent: 16 85% 53%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -33,7 +33,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -64,7 +64,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 24 98% 50%;
+    --accent: 16 85% 53%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -91,16 +91,17 @@
 
   body {
     @apply bg-background text-foreground min-h-screen;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 }
 
 @layer components {
   .product-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
   }
   
   .product-card {
-    @apply h-full flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300;
+    @apply h-full flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px];
   }
   
   .product-image-container {
@@ -113,5 +114,21 @@
   
   .page-container {
     @apply container mx-auto px-4 py-8;
+  }
+
+  .btn-hover-effect {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .btn-hover-effect::after {
+    @apply content-[''] absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-hover-effect:hover::after {
+    @apply opacity-20;
+  }
+
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20;
   }
 }

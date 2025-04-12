@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +8,7 @@ import { ShoppingCart, Star, ChevronLeft, ShieldCheck, Truck, RotateCcw } from '
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
+import { formatINR } from '@/utils/formatCurrency';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -111,7 +111,7 @@ const ProductDetail = () => {
             <span className="text-gray-600">{product.rating.count} reviews</span>
           </div>
           
-          <div className="text-3xl font-bold text-accent">${product.price.toFixed(2)}</div>
+          <div className="text-3xl font-bold text-accent">{formatINR(product.price)}</div>
           
           <p className="text-gray-700 leading-relaxed">{product.description}</p>
           

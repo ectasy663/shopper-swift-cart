@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api, Product } from '@/services/api';
@@ -11,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
+import { formatINR } from '@/utils/formatCurrency';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -38,7 +38,6 @@ const Products = () => {
 
   useEffect(() => {
     if (!productsLoading && products.length > 0) {
-      // Add a slight delay to ensure smooth animations
       const timer = setTimeout(() => {
         setIsLoaded(true);
       }, 300);
@@ -166,7 +165,7 @@ const Products = () => {
                   </Link>
                 </CardContent>
                 <CardFooter className="flex justify-between mt-auto">
-                  <p className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</p>
+                  <p className="text-xl font-bold text-gray-900">{formatINR(product.price)}</p>
                   <Button 
                     onClick={() => handleAddToCart(product)}
                     className="bg-accent hover:bg-accent/90 text-white btn-hover-effect"

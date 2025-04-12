@@ -1,11 +1,11 @@
-
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
-import { MinusCircle, PlusCircle, Trash, ChevronLeft, ShoppingBag, CreditCard, CheckCircle } from 'lucide-react';
+import { MinusCircle, PlusCircle, Trash, ChevronLeft, ShoppingBag, CreditCard, CheckCircle, ShieldCheck, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
+import { formatINR } from '@/utils/formatCurrency';
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, clearCart, getTotal } = useCart();
@@ -17,7 +17,6 @@ const Cart = () => {
     setIsProcessing(true);
     setProcessProgress(0);
     
-    // Simulate processing stages with progress
     const interval = setInterval(() => {
       setProcessProgress(prev => {
         if (prev >= 100) {
@@ -28,7 +27,6 @@ const Cart = () => {
       });
     }, 75);
     
-    // Simulate processing time
     setTimeout(() => {
       setCheckoutComplete(true);
       clearInterval(interval);
@@ -47,7 +45,6 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    // Animation cleanup
     return () => {
       setIsProcessing(false);
       setCheckoutComplete(false);
@@ -104,7 +101,7 @@ const Cart = () => {
                 <Link to={`/product/${item.product.id}`}>
                   <h3 className="font-medium line-clamp-2 hover:text-accent transition-colors">{item.product.title}</h3>
                 </Link>
-                <p className="text-sm text-gray-500">Price: ${item.product.price.toFixed(2)}</p>
+                <p className="text-sm text-gray-500">Price: {formatINR(item.product.price)}</p>
               </div>
               
               <div className="flex sm:flex-col items-center gap-4 sm:gap-2 ml-auto">
@@ -131,7 +128,7 @@ const Cart = () => {
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <span className="font-bold">${(item.product.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-bold">{formatINR(item.product.price * item.quantity)}</span>
                   <Button 
                     variant="ghost" 
                     size="icon" 
@@ -153,7 +150,7 @@ const Cart = () => {
             <div className="space-y-3 mb-6">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span>${getTotal().toFixed(2)}</span>
+                <span>{formatINR(getTotal())}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
@@ -162,7 +159,7 @@ const Cart = () => {
               <div className="border-t pt-3 mt-3">
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span className="text-accent text-xl">${getTotal().toFixed(2)}</span>
+                  <span className="text-accent text-xl">{formatINR(getTotal())}</span>
                 </div>
               </div>
             </div>

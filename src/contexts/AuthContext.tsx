@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { api, LoginCredentials } from '@/services/api';
 import { useNavigate } from 'react-router-dom';

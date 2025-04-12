@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { Product } from '@/services/api';
 import { toast } from "sonner";

@@ -1,4 +1,3 @@
-
 /**
  * Formats a number as Indian Rupee (INR)
  * @param amount The amount to format
